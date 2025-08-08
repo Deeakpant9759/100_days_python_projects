@@ -7,13 +7,11 @@ class Area():
             if not all(isinstance(x,(int,float)) for x in [self.Base,self.Length,self.Height]):
                 raise TypeError("Values Can't be an Float")
             if not (self.Base >= 0 and self.Length >=0 and self.Height >=0):
-                raise ValueError ("Measure Ment Can't Negtive")
-            
-        
-                
-
-
-
+                raise ValueError ("Measurement Can't Negtive")
+    def measuments(self):
+         def meters(self):
+              num
+    
     def Tringle(self):
 
         
