@@ -1,47 +1,30 @@
 def Queens(n):
     result=[]
-    def queen_check(array,n,cnt):
-        if cnt==n:
-          result.append(array) 
-          cnt = 0 
-        for row in range(n):
-            for col in range(n):
-                if array[row][col]=='':
-                    is_Queen_Valid(row,col,array,n)
-                    array[row][col]="Q"
-                    queen_range(row,col,array,n)
-                    cnt+=1
-                    if queen_check(array,n,cnt):
-                        return True
-                    array[row][col]=''
-    def is_Queen_Valid(row,col,array,n):
+    def queen_check(board,n,row):
+        if row == n:
+            result.append([''.join(r) for r in board])
+            return
+        for col in range(n):
+            if is_Queen_Valid(row,col,board,n):
+                board[row][col] = 'Q'
+                queen_check(board,n,row+1)
+                board[row][col]='.'
+
+    def is_Queen_Valid(row,col,baord,n):
         for i in range(n):
-            if array[row][i] !='' or array[i][col]!='':
+            if baord[row][i] =='Q' or baord[i][col]=='Q':
                 return False
         for j in range(n):
             for k in range(n):
                 if (j-k == row - col) or (j+k == row + col):
-                    if array[j][k]!="":
+                    if baord[j][k]=='Q':
                         return False
         return True
-    
-    def queen_range(row,col,array,n):
-         for i in range(n):
-            if i != col:
-                array[row][i] = "."
-            if i != row:
-                array[i][col] = "."
-         for j in range(n):
-            for k in range(n):
-                if (j == row) and (k == col):
-                    continue
-                if (j-k == row - col) or (j+k == row + col):
-                    array[j][k]="."
+    board = [['.' for _ in range(n)] for _ in range(n)]
+    queen_check(board,n,0)
+    return len(result)
 
-    grid = [["" for _ in range(n)] for _ in range(n)]
-    queen_check(grid,n,0)
-    return result
-print(Queens(4))
+print(Queens(8))
                        
                        
 
