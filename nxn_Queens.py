@@ -22,9 +22,9 @@ def Queens(n):
         return True
     board = [['.' for _ in range(n)] for _ in range(n)]
     queen_check(board,n,0)
-    return len(result)
+    return result
 
-print(Queens(8))
+print(Queens(5))
                        
                        
 
