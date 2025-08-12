@@ -1,11 +1,10 @@
 def fibonacci(n):
-    dp = [0]*(n+1)
-    if n>0:
-        dp[1]=1
-    count = 1
-    while count<n:
-        count +=1
-        dp[count] = dp[count-1] + dp[count -2]
-
-    return dp[n]
-  fibonacci(4)
+    if n <= 1: return n
+    prev , curr = 0,1
+    counter = 1
+    while counter <n:
+        next = prev + curr
+        prev,curr = curr,next
+        counter += 1
+    return curr
+print(fibonacci(100))

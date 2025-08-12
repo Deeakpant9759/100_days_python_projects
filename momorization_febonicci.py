@@ -4,4 +4,4 @@ def fabonacci(n,ht={0:0,1:1}):
     else:
         ht[n] = fabonacci(n-1)+fabonacci(n-2)
         return ht[n]
-fabonacci(4)
+print(fabonacci(1000))
