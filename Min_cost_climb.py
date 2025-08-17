@@ -1,7 +1,13 @@
 def minCostClimbingStairs(cost):
-    n = len(cost)
-    if n == 0:
-        return cost[0]
-    if n == 1:
-        return cost[1]
+    def helper(i,momo={}):
+        if i in momo:
+            return momo[i]
+        if i >=len(cost):
+            return 0
+        momo[i]= cost[i]+min(helper(i+1,momo), helper(i+2,momo))
+        return momo[i]
+    return min(helper(0),helper(1))
+    
+print(minCostClimbingStairs([10, 15, 20]))
+
     
