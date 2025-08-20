@@ -1,20 +1,23 @@
-def canPartition(nums):
-    result = []
-    def backtract(i,current):
-        if nums == current:
-            return
-        if i == len(nums):
-            result.append(current[:])
-            return 
-        current.append(nums[i])
-        backtract(i+1,current)
-        current.pop()
-        backtract(i+1,current)
-    backtract(0,[])
-    for i in range(len(result)):
-        for j in range(i+1,len(result)):
-            if sum(result[i])==sum(result[j]):
+class Solution:
+    def canPartition(self, nums: List[int]) -> bool:
+        if sum(nums) % 2 != 0:
+            return False
+        memo = {}
+        total_sum = sum(nums)
+        target = total_sum // 2
+        def backtrack(i,current_sum):
+            if (i,current_sum) in memo:
+                return memo[(i,current_sum)]
+            if current_sum == target:
                 return True
-    return False
-        
-    
+            if i == len(nums) or current_sum > target:
+                return False
+            if backtrack(i+1,current_sum + nums[i]):
+                memo[(i,current_sum)] = True
+                return True
+            if backtrack(i+1,current_sum):
+                memo[(i,current_sum)] = True
+                return True
+            memo[(i,current_sum)] = False
+            return False
+        return backtrack(0,0)  
