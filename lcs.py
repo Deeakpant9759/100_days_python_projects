@@ -1,16 +1,14 @@
 def longestCommonSubsequence(text1, text2):
     #write code here
-    result=[]
-    def backtract(i,current):
-        if text2 ==current:
-            return len(text2)
-        if i == len(text1):
-            result.append(current[:])
-            return
-        current.append(text1[i])
-        backtract(i+1,current)
-        current.pop()
-        backtract(i+1,current)
-        return 0
-    return backtract(0,[])
-    
+    n = len(text1)
+    m = len(text2)
+    def helper(index1,index2):
+        if index1 >=n-1 or index2 >= m-1:
+            return 0
+        if text1[index1] == text2[index2]:
+            return 1+helper(index1+1, index2+1)
+        return max(helper(index1+1, index2), helper(index1, index2+1))
+
+    return helper(0, 0)
+
+print(longestCommonSubsequence("ezupkr", "ubmrapg"))  # Output: 3
